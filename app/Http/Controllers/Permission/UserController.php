@@ -32,7 +32,6 @@ class UserController extends Controller
     public function create()
     {
         return view('permission.user.create');
-
     }
 
     /**
@@ -91,7 +90,6 @@ class UserController extends Controller
 
         return redirect()->back()
             ->with('success', 'User ' . $request->get('name') . ' successfully updated.');
-
     }
 
     /**

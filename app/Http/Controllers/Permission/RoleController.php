@@ -29,7 +29,6 @@ class RoleController extends Controller
     public function create()
     {
         return view('permission.role.create');
-
     }
 
     /**
@@ -83,7 +82,6 @@ class RoleController extends Controller
 
         return redirect()->back()
             ->with('success', 'User ' . $request->get('name') . ' successfully updated.');
-
     }
 
     /**
