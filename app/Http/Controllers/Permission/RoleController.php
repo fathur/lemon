@@ -18,6 +18,8 @@ class RoleController extends Controller
      */
     public function index()
     {
+        $this->grant('view-role');
+
         return view('permission.role.index');
     }
 
@@ -28,6 +30,8 @@ class RoleController extends Controller
      */
     public function create()
     {
+        $this->grant('create-role');
+
         return view('permission.role.create');
     }
 
@@ -40,6 +44,8 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        $this->grant('create-role');
+
         \Validator::make($request->all(), $this->rules)
             ->validate();
 
@@ -61,6 +67,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        $this->grant('edit-role');
+
         return view('permission.role.edit', compact('role'));
     }
 
@@ -74,6 +82,8 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
+        $this->grant('edit-role');
+
         \Validator::make($request->all(), $this->rules)
             ->validate();
 
@@ -89,10 +99,14 @@ class RoleController extends Controller
      *
      * @param  \App\Role $role
      *
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Role $role)
     {
+
+        $this->grant('delete-role');
+
         return Role::destroy($role->id);
     }
 
@@ -103,6 +117,8 @@ class RoleController extends Controller
      */
     public function data()
     {
+        $this->grant('view-role');
+
         return \Datatables::of(Role::select('*'))
             ->addColumn('action', function ($role) {
                 return view('layouts.actions.1')
@@ -110,6 +126,10 @@ class RoleController extends Controller
                         'name'    => $this->name,
                         'edit'    => route('roles.edit', $role->id),
                         'destroy' => route('roles.destroy', $role->id)
+                    ])
+                    ->with('ability', [
+                        'edit'   => 'edit-role',
+                        'delete' => 'delete-role'
                     ])
                     ->render();
             })
@@ -125,6 +145,8 @@ class RoleController extends Controller
      */
     public function select(Request $request)
     {
+        $this->grant('create-user');
+
         $q = strtolower($request->get('q'));
 
         return Role::select(['id', 'name'])

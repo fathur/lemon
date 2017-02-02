@@ -26,11 +26,20 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->grant('view-user');
+
         return view('permission.user.index');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * @author Fathur Rohman <hi.fathur.rohman@gmail.com>
+     */
     public function create()
     {
+        $this->grant('create-user');
+
         return view('permission.user.create');
     }
 
@@ -42,6 +51,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->grant('create-user');
+
         \Validator::make($request->all(), $this->rules)
             ->validate();
 
@@ -66,6 +77,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->grant('edit-user');
+
         return view('permission.user.edit', compact('user'));
     }
 
@@ -79,6 +92,8 @@ class UserController extends Controller
      */
     public function update(User $user, Request $request)
     {
+        $this->grant('edit-user');
+
         \Validator::make($request->all(), $this->rules)
             ->validate();
 
@@ -95,12 +110,14 @@ class UserController extends Controller
     /**
      * @param User $user
      *
-     * @return int
      *
+     * @return int
      * @author   Fathur Rohman <hi.fathur.rohman@gmail.com>
      */
     public function destroy(User $user)
     {
+        $this->grant('delete-user');
+
         return User::destroy($user->id);
     }
 
@@ -111,6 +128,8 @@ class UserController extends Controller
      */
     public function data()
     {
+        $this->grant('view-user');
+
         return \Datatables::of(User::select('*'))
             // ->rawColumns(['email', 'active', 'action'])
             ->editColumn('email', function ($user) {
@@ -122,6 +141,10 @@ class UserController extends Controller
                         'name'    => $this->name,
                         'edit'    => route('users.edit', $user->id),
                         'destroy' => route('users.destroy', $user->id)
+                    ])
+                    ->with('ability', [
+                        'edit'   => 'edit-user',
+                        'delete' => 'delete-user'
                     ])
                     ->render();
             })

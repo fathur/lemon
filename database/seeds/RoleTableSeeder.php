@@ -18,11 +18,11 @@ class RoleTableSeeder extends Seeder
             'slug' => \Illuminate\Support\Str::slug($role)
         ]);
 
-        if (env('APP_ENV') != 'production') {
-
-            factory(\App\Role::class, 10)->create()->each(function($role){
-                $role->users()->save(factory(App\User::class)->make());
-            });
-        }
+//        if (env('APP_ENV') != 'production') {
+//
+//            factory(\App\Role::class, 10)->create()->each(function($role){
+//                $role->users()->save(factory(App\User::class)->make());
+//            });
+//        }
     }
 }

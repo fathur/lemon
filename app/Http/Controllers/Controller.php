@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Permission;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -16,5 +17,11 @@ class Controller extends BaseController
     public function __construct()
     {
         view()->share('name', $this->name);
+    }
+
+    public function grant($ability)
+    {
+        $permission = new Permission();
+        $permission->grant($ability, false);
     }
 }

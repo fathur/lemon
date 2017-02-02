@@ -58,4 +58,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function isAdmin()
+    {
+        $role = Role::whereSlug('administrator')->first();
+        if ($this->role_id == $role->id) {
+            return true;
+        }
+
+        return false;
+    }
 }

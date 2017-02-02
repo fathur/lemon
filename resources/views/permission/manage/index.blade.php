@@ -11,7 +11,9 @@
                     <tr>
                         <td>Permission</td>
                         @foreach($roles as $role)
-                        <td>{{$role->name}}</td>
+                            @if($role->slug != 'administrator')
+                            <td>{{$role->name}}</td>
+                            @endif
                         @endforeach
                     </tr>
                     </thead>
@@ -71,7 +73,9 @@
                 columns: [
                     {data: 'permission', name: 'permission'},
                     @foreach($roles as $role)
-                    {data: 'role-{{$role->id}}', name: '{{$role->name}}', searchable: false, orderable: false},
+                        @if($role->slug != 'administrator')
+                        {data: 'role-{{$role->id}}', name: '{{$role->name}}', searchable: false, orderable: false},
+                        @endif
                     @endforeach
                 ]
             });

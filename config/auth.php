@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard'     => 'web',
         'passwords' => 'users',
     ],
 
@@ -37,12 +37,12 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
+            'driver'   => 'session',
             'provider' => 'users',
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver'   => 'token',
             'provider' => 'users',
         ],
     ],
@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model'  => App\User::class,
         ],
 
         // 'users' => [
@@ -91,12 +91,37 @@ return [
     |
     */
 
-    'passwords' => [
+    'passwords'   => [
         'users' => [
             'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60,
+            'table'    => 'password_resets',
+            'expire'   => 60,
         ],
     ],
+
+    /**
+     *
+     *
+     *
+     */
+    'permissions' => [
+        'view-role'   => 'Can view roles',
+        'create-role' => 'Can create roles',
+        'edit-role'   => 'Can edit roles',
+        'delete-role' => 'Can delete roles',
+
+        'view-user'   => 'Can view users',
+        'create-user' => 'Can create users',
+        'edit-user'   => 'Can edit users',
+        'delete-user' => 'Can delete users',
+
+        'view-post'   => 'Can view posts',
+        'create-post' => 'Can create posts',
+        'edit-post'   => 'Can edit posts',
+        'delete-post' => 'Can delete posts',
+
+        'view-permission-manager' => 'Can view permissions manager',
+        'edit-permission-manager' => 'Can change permissions',
+    ]
 
 ];

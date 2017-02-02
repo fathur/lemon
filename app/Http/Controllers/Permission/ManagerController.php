@@ -17,6 +17,8 @@ class ManagerController extends Controller
      */
     public function index()
     {
+        $this->grant('view-permission-manager');
+
         $roles = Role::orderBy('id')->get();
 
         return view('permission.manage.index', compact('roles'));
@@ -31,6 +33,8 @@ class ManagerController extends Controller
      */
     public function manage(Request $request)
     {
+        $this->grant('edit-permission-manager');
+
         $permissionId = $request->get('permission');
         $roleId = $request->get('role');
 
@@ -58,8 +62,8 @@ class ManagerController extends Controller
         }
 
         return response()->json([
-            'checked'   => $checked,
-            'status'    => $status
+            'checked' => $checked,
+            'status'  => $status
         ]);
     }
 
@@ -70,6 +74,8 @@ class ManagerController extends Controller
      */
     public function data()
     {
+        $this->grant('view-permission-manager');
+
         $pgHolder = [];
 
         $permissions = new Collection();
