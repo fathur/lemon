@@ -42,7 +42,7 @@ class ManagerController extends Controller
             ->where('role_id', $roleId)
             ->count();
 
-        if($pgCount == 0) {
+        if ($pgCount == 0) {
             $permission->roles()->attach($roleId);
 
             $checked = true;
@@ -63,6 +63,11 @@ class ManagerController extends Controller
         ]);
     }
 
+    /**
+     * @return mixed
+     *
+     * @author Fathur Rohman <hi.fathur.rohman@gmail.com>
+     */
     public function data()
     {
         $pgHolder = [];
@@ -86,9 +91,11 @@ class ManagerController extends Controller
 
             foreach ($roles as $role) {
                 if (in_array($this->relatePermissionRole($permission->id, $role->id), $pgHolder)) {
-                    $checkbox = '<input onclick="manageRole.change(this)" type="checkbox" checked="checked" value="1" data-permission="' . $permission->id . '" data-role="' . $role->id . '">';
+                    $checkbox = '<input onclick="manageRole.change(this)" type="checkbox" checked="checked" ' .
+                        'value="1" data-permission="' . $permission->id . '" data-role="' . $role->id . '">';
                 } else {
-                    $checkbox = '<input onclick="manageRole.change(this)" type="checkbox" value="1" data-permission="' . $permission->id . '" data-role="' . $role->id . '">';
+                    $checkbox = '<input onclick="manageRole.change(this)" type="checkbox" value="1" ' .
+                        'data-permission="' . $permission->id . '" data-role="' . $role->id . '">';
                 }
 
                 $pushData["role-{$role->id}"] = $checkbox;
@@ -101,6 +108,14 @@ class ManagerController extends Controller
             ->make(true);
     }
 
+    /**
+     * @param $permission
+     * @param $role
+     *
+     * @return string
+     *
+     * @author Fathur Rohman <hi.fathur.rohman@gmail.com>
+     */
     private function relatePermissionRole($permission, $role)
     {
         return "$permission-$role";
