@@ -33,6 +33,7 @@ Route::group([
     Route::get('roles/data', ['uses' => 'RoleController@data', 'as' => 'roles.data']);
     Route::resource('roles', 'RoleController');
 
-    Route::get('manage', 'PermissionController@show');
-    Route::post('manage', 'PermissionController@manage');
+    Route::get('manage', ['uses' => 'ManagerController@index', 'as' => 'permissions.index']);
+    Route::get('manage/data', ['uses' => 'ManagerController@data', 'as' => 'permissions.data']);
+    Route::put('manage', ['uses' => 'ManagerController@manage', 'as' => 'permissions.manage']);
 });
