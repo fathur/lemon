@@ -31,6 +31,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User whereUsername($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Post[] $posts
  */
 class User extends Authenticatable
 {
@@ -57,6 +58,11 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 
     public function isAdmin()

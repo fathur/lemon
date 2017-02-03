@@ -1,1 +1,0 @@
-var helper={confirmDelete:function(o){var a=$(o).data("action"),t=$(o).data("table"),e=$("#"+t).DataTable();bootbox.confirm("Are you sure want to move this to trash?",function(o){o&&$.ajax({url:a,method:"DELETE",data:{_token:window.Lemon.csrfToken},success:function(o){"1"!=o&&1!=o||e.ajax.reload(null,!1)},error:function(){}})})}};

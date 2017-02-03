@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Lemon') }}</title>
 
     <!-- Styles -->
-    <link href="{{asset('assets/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset(elixir('/css/app.css'))}}" rel="stylesheet">
 
@@ -104,8 +104,8 @@
 
         @yield('content')
     </div>
-    <script src="{{asset('assets/jquery/dist/jquery.min.js')}}"></script>
-    <script src="{{asset('assets/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
     @yield('scripts')
 
     <!-- Scripts -->
