@@ -13,12 +13,6 @@ use Illuminate\Http\Request;
  */
 class UserController extends Controller
 {
-    private $rules = [
-        'email'   => 'required|email',
-        'role_id' => 'required',
-        // 'password' => 'required'
-    ];
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      *

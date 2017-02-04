@@ -39,5 +39,12 @@ Route::group([
     Route::put('manage', ['uses' => 'ManagerController@manage', 'as' => 'permissions.manage']);
 });
 
-Route::get('posts/data', ['uses' => 'PostController@data', 'as' => 'posts.data']);
-Route::resource('posts', 'PostController');
+Route::group([
+    'middleware' => ['auth']
+], function () {
+    Route::get('profile', ['uses' => 'ProfileController@index', 'as' => 'profiles.index']);
+    Route::put('profile', ['uses' => 'ProfileController@update', 'as' => 'profiles.update']);
+
+    Route::get('posts/data', ['uses' => 'PostController@data', 'as' => 'posts.data']);
+    Route::resource('posts', 'PostController');
+});

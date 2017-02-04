@@ -122,6 +122,8 @@ return [
 
         'view-permission-manager' => 'Can view permissions manager',
         'edit-permission-manager' => 'Can change permissions',
+
+        'edit-profile' => 'Can edit own profile',
     ]
 
 ];
