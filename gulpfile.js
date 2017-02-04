@@ -37,5 +37,7 @@ elixir((mix) => {
     .copy('bower_components/PACE/','public/assets/pace/')
     .copy('bower_components/select2/dist/','public/assets/select2/')
     .copy('bower_components/select2-bootstrap-theme/dist/','public/assets/select2-bootstrap-theme/')
+    .copy('bower_components/eonasdan-bootstrap-datetimepicker/build/','public/assets/datetimepicker/')
+    .copy('bower_components/moment/min/','public/assets/moment/')
         ;
 });

@@ -9,7 +9,9 @@ use Illuminate\Support\Str;
 
 class RoleController extends Controller
 {
-    private $rules = [];
+    private $rules = [
+        'name'  => 'required'
+    ];
 
     /**
      * Display a listing of the resource.

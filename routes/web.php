@@ -27,6 +27,9 @@ Route::group([
     Route::get('users/data', ['uses' => 'UserController@data', 'as' => 'users.data']);
     Route::resource('users', 'UserController', ['except' => ['show']]);
 
+    Route::get('users/{user}/password', ['uses' => 'UserController@password', 'as' => 'users.password.index']);
+    Route::put('users/{user}/password', ['uses' => 'UserController@changePassword', 'as' => 'users.password.update']);
+
     Route::get('roles/select', ['uses' => 'RoleController@select', 'as' => 'roles.select']);
     Route::get('roles/data', ['uses' => 'RoleController@data', 'as' => 'roles.data']);
     Route::resource('roles', 'RoleController', ['except' => ['show']]);

@@ -53,8 +53,12 @@ class UserController extends Controller
     {
         $this->grant('create-user');
 
-        \Validator::make($request->all(), $this->rules)
-            ->validate();
+        \Validator::make($request->all(), [
+            'username'  => 'required|unique:users,username',
+            'email'    => 'required|email',
+            'role_id'  => 'required',
+            'password' => 'required|min:7'
+        ])->validate();
 
         $user = new User();
         $user->email = $request->get('email');
@@ -94,7 +98,11 @@ class UserController extends Controller
     {
         $this->grant('edit-user');
 
-        \Validator::make($request->all(), $this->rules)
+        \Validator::make($request->all(), [
+            'username'  => 'required|unique:users,username',
+            'email'    => 'required|email',
+            'role_id'  => 'required',
+        ])
             ->validate();
 
         $user->email = $request->get('email');
@@ -131,16 +139,16 @@ class UserController extends Controller
         $this->grant('view-user');
 
         return \Datatables::of(User::select('*'))
-            // ->rawColumns(['email', 'active', 'action'])
             ->editColumn('email', function ($user) {
                 return "<a href='mailto:{$user->email}'>{$user->email}</a>";
             })
             ->addColumn('action', function ($user) {
-                return view('layouts.actions.1')
+                return view('permission.user.action')
                     ->with('action', [
-                        'name'    => $this->name,
-                        'edit'    => route('users.edit', $user->id),
-                        'destroy' => route('users.destroy', $user->id)
+                        'name'     => $this->name,
+                        'edit'     => route('users.edit', $user->id),
+                        'destroy'  => route('users.destroy', $user->id),
+                        'password' => route('users.password.index', $user->id)
                     ])
                     ->with('ability', [
                         'edit'   => 'edit-user',
@@ -159,5 +167,47 @@ class UserController extends Controller
                 return $user->role->name;
             })
             ->make(true);
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     *
+     * @author Fathur Rohman <hi.fathur.rohman@gmail.com>
+     */
+    public function password(User $user)
+    {
+        $this->grant('edit-user');
+
+        return view('permission.user.password', compact('user'));
+    }
+
+    /**
+     * @param User    $user
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Validation\ValidationException
+     *
+     * @author Fathur Rohman <hi.fathur.rohman@gmail.com>
+     */
+    public function changePassword(User $user, Request $request)
+    {
+        $this->grant('edit-user');
+
+        \Validator::make($request->all(), [
+            'password'         => 'required|min:7',
+            'password-confirm' => 'required|same:password'
+        ], [
+            'password-confirm.required' => 'The confirm password field is required.',
+            'password-confirm.same'     => 'The confirm password and password must match.'
+        ])->validate();
+
+        $user->password = bcrypt($request->get('password'));
+        $user->save();
+
+        return redirect()->route('users.index')
+            ->with('success', 'Password user ' . $user->name . ' successfully updated.');
     }
 }

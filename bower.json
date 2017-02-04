@@ -32,6 +32,7 @@
     "autogrow-textarea": "*",
     "dropzone": "^4.3.0",
     "bootstrap-timepicker": "^0.5.2",
-    "bootstrap-daterangepicker": "^2.1.25"
+    "bootstrap-daterangepicker": "^2.1.25",
+    "eonasdan-bootstrap-datetimepicker": "bootstrap-datetimepicker-3#^4.17.45"
   }
 }

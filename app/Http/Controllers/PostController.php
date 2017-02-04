@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -47,7 +48,12 @@ class PostController extends Controller
             ->validate();
 
         $post = new Post();
-       // ..
+        $post->author_id = \Auth::user()->id;
+        $post->active = $request->has('active') ? true : false;
+        $post->title = $request->get('title');
+        $post->slug = Str::slug($request->get('title'));
+        $post->content = $request->get('content');
+        $post->release_date = $request->get('release_date');
         $post->save();
 
         return redirect()->route('posts.index')
@@ -93,7 +99,10 @@ class PostController extends Controller
         \Validator::make($request->all(), $this->rules)
             ->validate();
 
-        // ...
+        $post->active = $request->has('active') ? true : false;
+        $post->title = $request->get('title');
+        $post->content = $request->get('content');
+        $post->release_date = $request->get('release_date');
         $post->save();
 
         return redirect()->back()
@@ -113,13 +122,18 @@ class PostController extends Controller
         return $post->delete();
     }
 
+    /**
+     * @return mixed
+     *
+     * @author Fathur Rohman <hi.fathur.rohman@gmail.com>
+     */
     public function data()
     {
         $this->grant('view-post');
 
         return \Datatables::of(Post::select('*'))
             ->addColumn('author', function($data) {
-                return $data->author()->name;
+                return $data->author->name;
             })
             ->addColumn('action', function ($post) {
                 return view('layouts.actions.1')
