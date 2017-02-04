@@ -20,13 +20,7 @@
                     <div class="form-group">
                         <label for="username" class="col-sm-2 control-label">Username</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="username" id="username" placeholder="Username" value="{{$user->username}}">
-
-                            @if ($errors->has('username'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                            @endif
+                            <input type="text" class="form-control" disabled id="username" placeholder="Username" value="{{$user->username}}">
                         </div>
                     </div>
 

@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Role;
+use App\Model\Role;
 
 class Permission
 {

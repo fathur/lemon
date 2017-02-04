@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Model\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -28,7 +28,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Role::class, function (Faker\Generator $faker) {
+$factory->define(App\Model\Role::class, function (Faker\Generator $faker) {
 
     $name = $faker->name;
 
@@ -38,7 +38,7 @@ $factory->define(App\Role::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Permission::class, function (Faker\Generator $faker) {
+$factory->define(App\Model\Permission::class, function (Faker\Generator $faker) {
 
     $p = $faker->name;
 

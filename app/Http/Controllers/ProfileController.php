@@ -23,7 +23,6 @@ class ProfileController extends Controller
 
         $user = \Auth::user();
         $user->email = $request->get('email');
-        $user->username = $request->get('username');
         $user->name = $request->get('name');
         $user->password = bcrypt($request->get('password'));
         $user->save();
@@ -44,7 +43,6 @@ class ProfileController extends Controller
     {
         if ($request->get('password') == '' and $request->get('password-confirm') == '') {
             $rules = [
-                'username' => 'required|unique:users,username',
                 'email'    => 'required|email',
 
             ];
@@ -52,7 +50,6 @@ class ProfileController extends Controller
             $message = [];
         } else {
             $rules = [
-                'username'         => 'required|unique:users,username',
                 'email'            => 'required|email',
                 'password'         => 'required|min:7',
                 'password-confirm' => 'required|same:password'

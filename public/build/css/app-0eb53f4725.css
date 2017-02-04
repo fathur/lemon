@@ -7752,4 +7752,15 @@ button.close {
   margin-left: 20px;
 }
 
+.notify i {
+  font-size: 18px;
+}
+
+.notify .badge-notify {
+  background: #bf5329;
+  position: relative;
+  left: -7px;
+  top: 2px;
+}
+
 /*# sourceMappingURL=app.css.map */

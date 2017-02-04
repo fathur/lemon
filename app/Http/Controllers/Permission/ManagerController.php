@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Permission;
 
 use App\Http\Controllers\Controller;
-use App\Permission;
-use App\Role;
+use App\Model\Permission;
+use App\Model\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 

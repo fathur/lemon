@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
+use App\Model\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -112,14 +112,14 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @param  \App\Model\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
     {
         $this->grant('delete-post');
 
-        return $post->delete();
+        return (int)$post->delete();
     }
 
     /**

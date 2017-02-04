@@ -1,0 +1,13 @@
+.notify {
+
+  i {
+    font-size: 18px;
+  }
+
+  .badge-notify {
+    background: $brand-danger;
+    position: relative;
+    left: -7px;
+    top: 2px;
+  }
+}
