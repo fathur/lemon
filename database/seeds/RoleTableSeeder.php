@@ -11,16 +11,22 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
-        $role = 'Administrator';
+        $admin = 'Administrator';
+        $user = 'User';
 
         DB::table('roles')->insert([
-            'name' => $role,
-            'slug' => \Illuminate\Support\Str::slug($role)
+            'name' => $admin,
+            'slug' => \Illuminate\Support\Str::slug($admin)
+        ]);
+
+        DB::table('roles')->insert([
+            'name' => $user,
+            'slug' => \Illuminate\Support\Str::slug($user)
         ]);
 
 //        if (env('APP_ENV') != 'production') {
 //
-//            factory(\App\Role::class, 10)->create()->each(function($role){
+//            factory(\App\Model\Role::class, 10)->create()->each(function($role){
 //                $role->users()->save(factory(App\User::class)->make());
 //            });
 //        }

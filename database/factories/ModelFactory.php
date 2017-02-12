@@ -23,7 +23,7 @@ $factory->define(App\Model\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
         'active'        => true,
         'role_id'        => function () {
-            return factory(App\Role::class)->create()->id;
+            return factory(App\Model\Role::class)->create()->id;
         }
     ];
 });

@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Role;
+use App\Model\Role;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
