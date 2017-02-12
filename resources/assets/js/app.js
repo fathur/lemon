@@ -14,7 +14,11 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('message-people', require('./components/MessagePeople.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        message: 'Hello Vue!'
+    }
 });

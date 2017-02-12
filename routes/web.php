@@ -1,3 +1,4 @@
+
 <?php
 
 /*
@@ -47,4 +48,6 @@ Route::group([
 
     Route::get('posts/data', ['uses' => 'PostController@data', 'as' => 'posts.data']);
     Route::resource('posts', 'PostController');
+
+    Route::resource('messages', 'MessageController', ['only' => ['index', 'store']]);
 });

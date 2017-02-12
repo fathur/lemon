@@ -16,7 +16,7 @@ class UserTableSeeder extends Seeder
             'name'           => 'Lemon Manis',
             'email'          => 'admin@lemon.com',
             'password'       => bcrypt('manis'),
-            'role_id'        => \App\Role::where('name', 'Administrator')->first()->id,
+            'role_id'        => \App\Model\Role::where('name', 'Administrator')->first()->id,
             'active'         => true,
             'remember_token' => str_random(10)
         ]);

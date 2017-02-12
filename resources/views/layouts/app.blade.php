@@ -17,6 +17,7 @@
     <script>
         window.Lemon = {!! json_encode([
             'csrfToken' => csrf_token(),
+            'url' => url()
         ]) !!};
     </script>
 </head>
@@ -66,7 +67,7 @@
                             <a href="#">Media</a>
                         </li>
                         <li>
-                            <a href="#">Messages</a>
+                            <a href="{{route('messages.index')}}">Messages</a>
                         </li>
                     </ul>
                     @endif

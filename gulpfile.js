@@ -17,7 +17,7 @@ elixir((mix) => {
     mix.sass('app.scss')
     .webpack('app.js')
     .scripts(['helper.js'], 'public/js/helper.js')
-    .version(['css/app.css', 'js/app.js', 'js/helper.js'])
+
 
     // copy npm and bower into public directory
     .copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/', 'public/build/fonts/bootstrap/')
@@ -39,5 +39,7 @@ elixir((mix) => {
     .copy('bower_components/select2-bootstrap-theme/dist/','public/assets/select2-bootstrap-theme/')
     .copy('bower_components/eonasdan-bootstrap-datetimepicker/build/','public/assets/datetimepicker/')
     .copy('bower_components/moment/min/','public/assets/moment/')
+
+    .version(['css/app.css', 'js/app.js', 'js/helper.js'])
         ;
 });
