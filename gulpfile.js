@@ -39,6 +39,7 @@ elixir((mix) => {
     .copy('bower_components/select2-bootstrap-theme/dist/','public/assets/select2-bootstrap-theme/')
     .copy('bower_components/eonasdan-bootstrap-datetimepicker/build/','public/assets/datetimepicker/')
     .copy('bower_components/moment/min/','public/assets/moment/')
+    .copy('bower_components/pusher-js/dist/web/','public/assets/pusher/')
 
     .version(['css/app.css', 'js/app.js', 'js/helper.js'])
         ;

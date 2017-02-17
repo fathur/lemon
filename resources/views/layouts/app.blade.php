@@ -17,7 +17,7 @@
     <script>
         window.Lemon = {!! json_encode([
             'csrfToken' => csrf_token(),
-            'url' => url()
+            'url' => url('/')
         ]) !!};
     </script>
 </head>
@@ -115,10 +115,33 @@
 </div>
 <script src="{{asset('assets/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('assets/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('assets/pusher/pusher.js')}}"></script>
 @yield('scripts')
         <!-- Scripts -->
 <script src="{{asset(elixir('/js/app.js'))}}"></script>
 <script src="{{asset(elixir('/js/helper.js'))}}"></script>
+
+<script>
+    (function() {
+        var socket = new Pusher('82577a05f0752ff5b33b', {
+            authEndpoint: "{{ url('/broadcasting/auth') }}",
+            headers: {
+                "X-CSRF-Token": "{{csrf_token()}}"
+            },
+            cluster: 'ap1',
+            encrypted: true
+        });
+
+        @if(Auth::check())
+        var channel = socket.subscribe('user.{{ Auth::user()->id }}');
+
+        channel.bind('status.new', function(data) {
+            console.log(data);
+        });
+        @endif
+    })();
+</script>
+
 @yield('script')
 </body>
 </html>

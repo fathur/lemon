@@ -40,6 +40,10 @@ Route::group([
     Route::put('manage', ['uses' => 'ManagerController@manage', 'as' => 'permissions.manage']);
 });
 
+Route::get('/@{username}', ['uses' => 'ProfileController@show', 'as' => 'profiles.show']);
+Route::post('/follow/{userId}', ['uses' => 'FollowController@follow', 'as' => 'users.follow']);
+Route::delete('/follow/{userId}', ['uses' => 'FollowController@unfollow', 'as' => 'users.unfollow']);
+
 Route::group([
     'middleware' => ['auth']
 ], function () {
@@ -50,4 +54,6 @@ Route::group([
     Route::resource('posts', 'PostController');
 
     Route::resource('messages', 'MessageController', ['only' => ['index', 'store']]);
+
+    Route::post('statuses', ['uses' => 'StatusController@store', 'as' => 'statuses.store']);
 });

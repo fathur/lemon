@@ -66,6 +66,24 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function statuses()
+    {
+        return $this->hasMany(Status::class);
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'user_artist_id', 'user_follower_id')
+            ->withTimestamps();
+    }
+
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'user_follower_id', 'user_artist_id')
+            ->withTimestamps();
+
+    }
+
     public function isAdmin()
     {
         $role = Role::whereSlug('administrator')->first();

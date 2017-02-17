@@ -33,6 +33,7 @@
     "dropzone": "^4.3.0",
     "bootstrap-timepicker": "^0.5.2",
     "bootstrap-daterangepicker": "^2.1.25",
-    "eonasdan-bootstrap-datetimepicker": "bootstrap-datetimepicker-3#^4.17.45"
+    "eonasdan-bootstrap-datetimepicker": "bootstrap-datetimepicker-3#^4.17.45",
+    "pusher-js": "pusher#^4.0.0"
   }
 }

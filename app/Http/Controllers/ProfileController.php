@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\User;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -63,5 +64,14 @@ class ProfileController extends Controller
 
         \Validator::make($request->all(), $rules, $message)
             ->validate();
+    }
+
+    public function show($username)
+    {
+        $user = User::whereUsername($username)->first();
+
+        $isFollower = $user->followers()->wherePivot('user_follower_id', '=', \Auth::user()->id)->first();
+
+        return view('profile.show', compact('user', 'isFollower'));
     }
 }
