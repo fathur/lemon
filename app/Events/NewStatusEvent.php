@@ -13,16 +13,22 @@ class NewStatusEvent implements ShouldBroadcast
 {
     use InteractsWithSockets, SerializesModels;
 
-    public $broadcastQueue = 'statuses';
+    # public $broadcastQueue = 'statuses';
+
+    /**
+     * @var
+     */
+    public $status;
 
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param $status
      */
-    public function __construct()
+    public function __construct($status)
     {
         //
+        $this->status = $status;
     }
 
     /**
@@ -32,14 +38,17 @@ class NewStatusEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        // return new PrivateChannel('channel-name');
 
-        return [
-            new PrivateChannel('user.1'),
-            new PrivateChannel('user.2'),
-            new PrivateChannel('user.3'),
-            new PrivateChannel('user.4'),
-        ];
+        $user = \Auth::user();
+
+        $usersName = $user->followers->pluck('username');
+
+        $channels = [];
+        foreach ($usersName as $username) {
+            array_push($channels, new PrivateChannel("user.{$username}"));
+        }
+
+        return $channels;
     }
 
     public function broadcastAs()
@@ -47,8 +56,8 @@ class NewStatusEvent implements ShouldBroadcast
         return 'status.new';
     }
 
-    public function broadcastWith()
-    {
-        return [];
-    }
+//    public function broadcastWith()
+//    {
+//        return [];
+//    }
 }

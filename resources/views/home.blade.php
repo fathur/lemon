@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
 
-            <ul class="list-group">
+            <ul class="list-group" id="list-statuses">
 
                 @foreach($statuses as $status)
                     <li class="list-group-item">{{$status->text}}</li>
@@ -39,7 +39,7 @@
                     status: status,
                     _token: window.Lemon.csrfToken
                 }, function(response) {
-
+                    $('#list-statuses').prepend('<li class="list-group-item">'+response.text+'</li>');
                 });
 
 

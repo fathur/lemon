@@ -16,7 +16,7 @@ class StatusController extends Controller
         ]);
 
 
-        event(new NewStatusEvent());
+        broadcast(new NewStatusEvent($status))->toOthers();
 
         return $status;
     }

@@ -123,20 +123,29 @@
 
 <script>
     (function() {
-        var socket = new Pusher('82577a05f0752ff5b33b', {
+        @if(Auth::check())
+
+        Pusher.logToConsole = true;
+
+        var socket = new Pusher('{{env('PUSHER_KEY')}}', {
             authEndpoint: "{{ url('/broadcasting/auth') }}",
-            headers: {
-                "X-CSRF-Token": "{{csrf_token()}}"
+            //authEndpoint: "{{ url('/socket/auth') }}",
+            auth: {
+                headers: {
+                    "X-CSRF-Token": "{{csrf_token()}}"
+                }
             },
             cluster: 'ap1',
             encrypted: true
         });
 
-        @if(Auth::check())
-        var channel = socket.subscribe('user.{{ Auth::user()->id }}');
+        var channel = socket.subscribe('private-user.{{ Auth::user()->username }}');
 
         channel.bind('status.new', function(data) {
+//            alert('horeee');
             console.log(data);
+            var currentVal = parseInt($('.badge-notify').html());
+            $('.badge-notify').html(currentVal + 1);
         });
         @endif
     })();
